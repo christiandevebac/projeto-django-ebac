@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mt-3 left">
+        <h1 class="mb-4">Postagens Recentes</h1>
+        {% for post in post_list %}
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title">{{ post.title }}</h2>
+                <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on }}</p>
+                <p class="card-text">{{ post.content|slice:":200" }}...</p>
+                <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Leia mais &rarr;</a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-info">Nenhuma postagem publicada ainda.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
